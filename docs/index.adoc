@@ -1,0 +1,111 @@
+:doctype: book
+:toc: center
+:toclevels: 3
+:imagesdir: img
+:front-cover-image: Portada.jpg[1200,800]
+:pdf-style: uoc
+:pdf-stylesdir: theme
+== Documentación Técnica
+
+=== Grafo Causa-Efecto
+
+[.text-justify]
+- Si el PMT no cubre el Ahorro, se *[red]#bloquean Servicios, Suscripciones y Ocio#*.
+- Si el PMT cubre el Ahorro pero no los Servicios, se *[red]#bloquean Suscripciones y Ocio#*.
+- Si el PMT cubre hasta Servicios pero no Suscripciones, se *[red]#bloquea el Ocio#*.
+- Si no se cubre alguna prioridad, se genera *[red]#Déficit#*.
+
+[.text-center]
+.Grafo de priorización presupuestal y bloqueo jerárquico
+image:Grafo.png[500,500]
+
+
+=== Tabla de Decisión
+
+=== Tabla de Decisión
+
+[cols="1,1,1,1,1,2,2", options="header"]
+|===
+| PMT | Ahorro | Servicios | Suscripciones | Ocio | Estado | Alertas
+
+| 0   | ❌ | ❌ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Ahorro
+| ✔   | ❌ | ❌ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Ahorro
+| ✔   | ✔ | ❌ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Servicios
+| ✔   | ✔ | ✔ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Suscripciones
+| ✔   | ✔ | ✔ | ✔ | ❌ | EJERCICIO_DEFICIT | Déficit en Ocio
+| ✔   | ✔ | ✔ | ✔ | ✔ | EJERCICIO | Sin alertas
+|===
+<<<
+
+== Bitácora de Ciclos (TDD)
+
+=== Prioridad 1 - Ahorro
+
+==== RED
+image:red_ahorro.png[]
+
+==== GREEN
+image:green_ahorro.png[]
+
+==== REFACTOR
+image:refactor_ahorro.png[]
+
+=== Prioridad 2 - Servicios
+
+==== RED
+image:red_servicios.png[]
+
+==== GREEN
+image:green_servicios.png[]
+
+==== REFACTOR
+image:refactor_servicios.png[]
+
+=== Prioridad 3 - Suscripciones
+
+==== RED
+image:red_suscripciones.png[]
+
+==== GREEN
+image:green_suscripciones.png[]
+
+==== REFACTOR
+image:refactor_suscripciones.png[]
+
+=== Prioridad 4 - Ocio
+
+==== RED
+image:red_ocio.png[]
+
+==== GREEN
+image:green_ocio.png[]
+
+==== REFACTOR
+image:refactor_ocio.png[]
+
+<<<
+
+== Código Final (presupuesto.py)
+
+[source,python]
+----
+
+----
+
+== Suite de Pruebas (test_presupuesto.py)
+
+[source,python]
+----
+
+----
+
+<<<
+
+== Conclusiones
+
+=== Leonardo
+Fue una manera de desarrollar totalmente diferente al principio me sentí algo perdido ya que no sabía por donde arrancar a partir de desarrollar la prueba primero pero conforme fuí trabajando fue quedando todo más claro y fue más fácil acomodarme.
+
+=== Integrante 2
+
+=== Integrante 3
