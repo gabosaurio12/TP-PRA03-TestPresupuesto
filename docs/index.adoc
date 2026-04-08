@@ -89,14 +89,133 @@ image:refactor_ocio.png[]
 
 [source,python]
 ----
+import Alerta
 
+estados = ["CONFIGURACION", "EJERCICIO", "EJERCICIO_DEFICIT"]
+
+def validar_presupuesto(pmt, meta_ahorro, serv_hist, susc_fijas, ocio_hist):
+    alertas = []
+
+    estado = (estados[0], alertas)
+    
+    if (pmt == 0 or pmt is None):
+        return estado
+    
+    pmt_sobrante = pmt
+
+    if (pmt_sobrante > meta_ahorro):
+        pmt_sobrante -= meta_ahorro
+
+        if (pmt_sobrante > serv_hist):
+            pmt_sobrante -= serv_hist
+
+            if (pmt_sobrante > susc_fijas):
+                pmt_sobrante -= susc_fijas
+
+                if (pmt_sobrante > ocio_hist):
+                    pmt_sobrante -= ocio_hist
+                    estado = (estados[1], alertas)
+                else:
+                    alerta = Alerta.Alerta.alerta_ocio()
+                    alertas.append(alerta)
+                    estado = (estados[2], alertas)
+            else:
+                alerta = Alerta.Alerta.alerta_suscripciones()
+                alertas.append(alerta)
+                estado = (estados[2], alertas)
+        else:
+            alerta = Alerta.Alerta.alerta_servicios()
+            alertas.append(alerta)
+            estado = (estados[2], alertas)
+    else:
+        alerta = Alerta.Alerta.alerta_ahorro()
+        alertas.append(alerta)  
+        estado = (estados[2], alertas)
+
+    return estado  
 ----
 
 == Suite de Pruebas (test_presupuesto.py)
 
 [source,python]
 ----
+import presupuesto as psto
 
+def test_pmt_ejercicio_deficit():
+    pmt = 1000
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    assert estado[0] == "EJERCICIO_DEFICIT"
+
+def test_pmt_alerta_ahorro():
+    pmt = 450
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    alertas = estado[1]
+    assert alertas[0].codigo == "deficit_ahorro"
+    
+def test_pmt_alerta_servicios():
+    pmt = 800
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    alertas = estado[1]
+    assert alertas[0].codigo == "deficit_servicios"
+
+def test_pmt_alerta_suscripciones():
+    pmt = 1100
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    alertas = estado[1]
+    assert alertas[0].codigo == "deficit_suscripciones"
+
+def test_pmt_alerta_ocio():
+    pmt = 1300
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    alertas = estado[1]
+    assert alertas[0].codigo == "deficit_ocio"
+
+def test_pmt_ejercicio():
+    pmt = 2000
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    assert estado[0] == "EJERCICIO"
+
+def test_pmt_cero():
+    pmt = 0
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    assert estado[0] == "CONFIGURACION"
+
+def test_pmt_none():
+    pmt = None
+    ahorro = 500
+    servicios = 500
+    suscripciones = 200
+    ocio = 200
+    estado = psto.validar_presupuesto(pmt, ahorro, servicios, suscripciones, ocio)
+    assert estado[0] == "CONFIGURACION"
 ----
 
 <<<
@@ -109,3 +228,6 @@ Fue una manera de desarrollar totalmente diferente al principio me sentí algo p
 === Gabriel
 
 === Seth
+El proceso de escribir primero las pruebas nos ayudó a entender mejor el problema y a construir el código paso a paso, evitando errores desde el inicio.
+
+El hacer el grafo y la tabla de decisión facilitó visualizar cómo se comporta el sistema cuando no se cumple alguna prioridad.
