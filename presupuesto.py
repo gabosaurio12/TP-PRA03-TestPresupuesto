@@ -41,4 +41,4 @@ def validar_presupuesto(pmt, meta_ahorro, serv_hist, susc_fijas, ocio_hist):
         alertas.append(alerta)  
         estado = (estados[2], alertas)
 
-    return estado  
+    return estado
