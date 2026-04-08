@@ -361,4 +361,9 @@ Fue una manera de desarrollar totalmente diferente al principio me sentí algo p
 
 === Gabriel
 
+Me gustó mucho esta forma de desarrollar, creí que el código final sería un poco sucio pero no, estuvo muy bien. Me ayudó mucho tener que concentrarme solo en una micro función a la vez porque no sobre pensaba lo que debía hacer.
+
 === Seth
+El proceso de escribir primero las pruebas nos ayudó a entender mejor el problema y a construir el código paso a paso, evitando errores desde el inicio.
+
+El hacer el grafo y la tabla de decisión facilitó visualizar cómo se comporta el sistema cuando no se cumple alguna prioridad.
