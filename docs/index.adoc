@@ -1,10 +1,11 @@
 :doctype: book
-:toc: center
+:toc: left
 :toclevels: 3
 :imagesdir: img
-:front-cover-image: Portada.jpg[1200,800]
+:front-cover-image: img/Portada.jpg
 :pdf-style: uoc
 :pdf-stylesdir: theme
+
 == Documentación Técnica
 
 === Grafo Causa-Efecto
