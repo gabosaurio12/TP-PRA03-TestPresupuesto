@@ -106,6 +106,6 @@ image:refactor_ocio.png[]
 === Leonardo
 Fue una manera de desarrollar totalmente diferente al principio me sentí algo perdido ya que no sabía por donde arrancar a partir de desarrollar la prueba primero pero conforme fuí trabajando fue quedando todo más claro y fue más fácil acomodarme.
 
-=== Integrante 2
+=== Gabriel
 
-=== Integrante 3
+=== Seth
