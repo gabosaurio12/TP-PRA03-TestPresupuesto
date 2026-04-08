@@ -20,21 +20,19 @@
 .Grafo de priorización presupuestal y bloqueo jerárquico
 image:Grafo.png[500,500]
 
-
-=== Tabla de Decisión
-
 === Tabla de Decisión
 
 [cols="1,1,1,1,1,2,2", options="header"]
 |===
 | PMT | Ahorro | Servicios | Suscripciones | Ocio | Estado | Alertas
 
-| 0   | ❌ | ❌ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Ahorro
-| ✔   | ❌ | ❌ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Ahorro
-| ✔   | ✔ | ❌ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Servicios
-| ✔   | ✔ | ✔ | ❌ | ❌ | EJERCICIO_DEFICIT | Déficit en Suscripciones
-| ✔   | ✔ | ✔ | ✔ | ❌ | EJERCICIO_DEFICIT | Déficit en Ocio
-| ✔   | ✔ | ✔ | ✔ | ✔ | EJERCICIO | Sin alertas
+| NO CUMPLE | NO CUMPLE | NO CUMPLE | NO CUMPLE | NO CUMPLE | EJERCICIO_DEFICIT | Déficit en Ahorro
+| CUMPLE    | NO CUMPLE | NO CUMPLE | NO CUMPLE | NO CUMPLE | EJERCICIO_DEFICIT | Déficit en Ahorro
+| CUMPLE    | CUMPLE    | NO CUMPLE | NO CUMPLE | NO CUMPLE | EJERCICIO_DEFICIT | Déficit en Servicios
+| CUMPLE    | CUMPLE    | CUMPLE    | NO CUMPLE | NO CUMPLE | EJERCICIO_DEFICIT | Déficit en Suscripciones
+| CUMPLE    | CUMPLE    | CUMPLE    | CUMPLE    | NO CUMPLE | EJERCICIO_DEFICIT | Déficit en Ocio
+| CUMPLE    | CUMPLE    | CUMPLE    | CUMPLE    | CUMPLE    | EJERCICIO         | Sin alertas
+
 |===
 <<<
 
